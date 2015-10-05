@@ -1,0 +1,98 @@
+snippet cutf
+	# coding: utf-8
+# import
+snippet fro
+	from ${1:package} import ${2:module}
+
+# If/else/elif
+snippet if
+	if ${1:True}:
+	    ${2:pass}
+snippet else
+	else:
+	    ${1:pass}
+snippet elif
+	elif ${1:True}:
+	    ${2:pass}
+#hasattr/getattr
+snippet hasa
+	hasattr(${1:object}, ${2:attr})
+snippet geta 
+	getattr(${1:object}, "${2:attr}", ${3:None})
+
+# decorator
+snippet deco
+	class ${1:decorator}(object):
+		""" $1 decorator """
+		def __init__(self, f):
+			self.f = f
+		def __call__(self, *args, **kwargs):
+			self.f(*args, **kwargs)
+# context manager	
+snippet context
+	class ${1:context}(object):
+		""" $1 context manager """
+		def __init__(self, ${2:attr}):
+			self.$2 = $2
+
+		def __enter__(self):
+		    ${3:# TODO : write code here}
+
+		def __exit__(self, type, value, traceback):
+		    ${4:# TODO : write code here}
+# tests class
+snippet clt
+	class ${1:What}Tests(${2:unittest.TestCase}):
+		""" Tests for $1"""
+		def test_${3:what}(self):
+			"""Tests that ${4:what}"""
+			${5:pass}
+# tests
+snippet test
+	def test_${1:what}(self):
+		"""Tests that ${2:what}"""
+		${3:pass}
+# context
+snippet with
+	with ${1:context} as ${2:name}:
+	    ${3:pass}
+
+# import python loggin module and create a logger
+snippet ilo
+	import logging
+	logger = logging.getLogger(__name__)
+# log
+snippet lo
+	logger.${1:info}("${2:Message}")
+snippet info
+	logger.info("${1:Message}")
+snippet debug
+	logger.debug("${1:Message}")
+snippet warning
+	logger.warning("${1:Message}")
+snippet critical
+	logger.critical("${1:Message}")
+snippet log
+	logger.log(logging.${1:DEBUG}, "${2:Message}")
+snippet exception
+	logger.exception("${1:Message}")
+
+# insert ipdb breakpoint
+snippet pdb
+	import ipdb; ipdb.set_trace()
+
+# Try/except with logging
+snippet try Try/Except - Log
+	try:
+		${1:pass}
+	except ${2:Exception}, ${3:exc}:
+		logger.exception("${4:Message}")
+		${5:raise}
+snippet try Try/Except/Finally - Log
+	try:
+		${1:pass}
+	except ${2:Exception}, ${3:exc}:
+		logger.exception("${4:Message}")
+		${4:raise}
+	finally:
+		${5:pass}

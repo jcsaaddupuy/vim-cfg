@@ -1,0 +1,190 @@
+" Annule la compatibilite avec l’ancetre Vi
+set nocompatible
+
+" Affichage
+set title	"Mets à jour le titre de cla console
+set ruler	"Affiche le numéros de lignes
+set number	"Affiche les numéros de lignes
+set wrap	"Affiche les lignes trop longues sur plusieurs lignes
+set scrolloff=3	"Affiche un minimum de 3 lignes autour du curseur pour le scroll
+
+"-- Recherche
+set ignorecase	"Case insensitive par default pour la recherche
+set smartcase	"Si une recherche contient une majuscule re-active la sensibilite a la casse
+
+set incsearch	"Surligne les resultats de recherche pendant la
+set hlsearch	"Surligne les resultats de recherche
+
+" -- Beep
+set visualbell	 "Empeche Vim de beeper
+set noerrorbells "Empeche vim de beeper
+
+" Active le comportement ’habituel’ de la touche retour en arriere
+set backspace=indent,eol,start
+
+" Cache les fichiers lors de l’ouverture d’autres fichiers
+set hidden
+
+" Active la coloration syntaxique
+syntax on
+" Active les comportements specifiques aux types de fichiers comme la syntaxe et l’indentation
+filetype on
+filetype plugin on
+filetype indent on
+autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+" Active la ligne de status
+set ls=2
+
+" Indent avec 2 espaces au lieu de tabs
+set expandtab
+"set textwidth=79
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+
+" relativenumbers
+set relativenumber "numbers are relatives
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+
+" Activation de pathogen
+call pathogen#infect()
+
+" Les ; sons rarement utilise l’un a la suite de l’autre: remappe ;; avec la
+" touche escape 
+imap ;; <Esc>
+
+" touche d'activation
+let mapleader = ","
+
+" Utilise la version sombre de Solarized
+set background=dark
+colorscheme solarized
+" Enable transparent background"
+let g:solarized_termtrans=1
+let g:solarized_hitrail=1
+let g:solarized_underline=1
+let g:solarized_visibility='high'
+let g:solarized_contrast='high'
+
+set t_Co=16
+
+" Activation de NERDTree sur un CTRL n
+map <silent> <F2> :NERDTreeToggle<CR>
+
+" Activation de taglit sur un CTRL b
+map <silent> <F3> :TagbarToggle<CR>
+" Agrandit la window de taglist
+let Tlist_WinWidth = 50
+
+" Desactiver les touches directionnelles
+"map <up> <nop>
+"map <down> <nop>
+"map <left> <nop>
+"map <right> <nop>
+"imap <up> <nop>
+"imap <down> <nop>
+"imap <left> <nop>
+"imap <right> <nop>
+
+
+"improve autocomplete menu color
+hi Pmenu        cterm=none ctermfg=White     ctermbg=Black
+hi PmenuSel     cterm=none ctermfg=Black     ctermbg=DarkGreen
+hi PmenuSbar    cterm=none ctermfg=none      ctermbg=Green
+hi PmenuThumb   cterm=none ctermfg=DarkGreen ctermbg=DarkGreen
+
+
+" Save vim buffers. Note that if Vim is invoked with a filename argument, then
+" the buffer list will not be restored from the last session. To use buffer
+" lists across sessions, invoke Vim without passing filename arguments. 
+set viminfo+=%
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&readonly?"x":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
+
+
+"raccourcis claviers {
+" Nextval plugin
+nmap <silent> <unique> + <Plug>nextvalInc
+nmap <silent> <unique> - <Plug>nextvalDec
+
+
+
+let g:ctrlp_map = '<c-p>'
+nnoremap <leader>. :CtrlPTag<cr>
+"}
+"
+
+" pythons stuffs {
+autocmd BufWritePost *.py call Flake8()
+" removes trailing spaces on save against python files
+autocmd BufWritePre *.py :%s/\s\+$//e
+" " plugin flake
+let g:flake8_quickfix_location="topleft"
+" shortcut for autopep8
+map <F8> :! autopep8 -i %<CR><ESC>
+let g:flake8_ignore="W602"
+"plugin python mode
+"map <F8> :PymodeLintAuto<CR><ESC>
+" disable anoying code folding
+"let g:pymode_folding=0
+
+" call flake8 against python files
+"autocmd BufWritePost *.py :PymodeLint
+" uses ipdb
+" let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # XXX BREAKPOINT'
+"}
+
+map <leader>td <Plug>TaskList
+nnoremap <F5> :GundoToggle<CR>
+
+" Os specifics
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+    " uses custom ctags for osx
+    if !empty(glob("/opt/boxen/homebrew/bin/ctags"))
+        let g:tagbar_ctags_bin='/opt/boxen/homebrew/bin/ctags'
+    endif
+elseif os == "Linux"
+    " specific archlinux / python2
+    if !empty(glob("/usr/bin/flake8-python2"))
+        let g:flake8_cmd='/usr/bin/flake8-python2'
+    endif
+endif
+
+" enable ACK search
+let g:ackprg="ack -H --nocolor --nogroup --column"
+nmap <leader>j mA:Ack<space>
+nmap <leader>ja mA:Ack"<C-r>=expand("<cword>")<cr>"
+nmap <leader>jA mA:Ack"<C-r>=expand("<cWORD>")<cr>"
+
+
+autocmd FileType python set ft=python.django " For SnipMate
+autocmd FileType html set ft=htmldjango.html " For SnipMate
+" python folding
+"set foldmethod=indent
+"map ,f :set foldmethod=indent<cr>zM<cr>
+"map ,F :set foldmethod=manual<cr>zR<cr>
+"
+set tw=80
