@@ -125,11 +125,6 @@ let g:lightline = {
 
 
 "raccourcis claviers {
-" Nextval plugin
-nmap <silent> <unique> + <Plug>nextvalInc
-nmap <silent> <unique> - <Plug>nextvalDec
-
-
 
 let g:ctrlp_map = '<c-p>'
 nnoremap <leader>. :CtrlPTag<cr>
@@ -143,20 +138,8 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " " plugin flake
 let g:flake8_quickfix_location="topleft"
 " shortcut for autopep8
-map <F8> :! autopep8 -i %<CR><ESC>
-let g:flake8_ignore="W602"
-"plugin python mode
-"map <F8> :PymodeLintAuto<CR><ESC>
-" disable anoying code folding
-"let g:pymode_folding=0
+map <F8> :! yapf -i %<CR><ESC>
 
-" call flake8 against python files
-"autocmd BufWritePost *.py :PymodeLint
-" uses ipdb
-" let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # XXX BREAKPOINT'
-"}
-
-map <leader>td <Plug>TaskList
 nnoremap <F5> :GundoToggle<CR>
 
 " Os specifics
@@ -173,18 +156,8 @@ elseif os == "Linux"
     endif
 endif
 
-" enable ACK search
-let g:ackprg="ack -H --nocolor --nogroup --column"
-nmap <leader>j mA:Ack<space>
-nmap <leader>ja mA:Ack"<C-r>=expand("<cword>")<cr>"
-nmap <leader>jA mA:Ack"<C-r>=expand("<cWORD>")<cr>"
 
 
-autocmd FileType python set ft=python.django " For SnipMate
-autocmd FileType html set ft=htmldjango.html " For SnipMate
-" python folding
-"set foldmethod=indent
-"map ,f :set foldmethod=indent<cr>zM<cr>
-"map ,F :set foldmethod=manual<cr>zR<cr>
-"
-set tw=80
+" autocmd FileType python set ft=python.django " For SnipMate
+" autocmd FileType html set ft=htmldjango.html " For SnipMate
+set tw=160
