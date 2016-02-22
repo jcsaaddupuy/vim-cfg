@@ -50,11 +50,13 @@ set relativenumber "numbers are relatives
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'supertab')
 " Activation de pathogen
 call pathogen#infect()
 
 " Les ; sons rarement utilise l’un a la suite de l’autre: remappe ;; avec la
-" touche escape 
+" touche escape
 imap ;; <Esc>
 
 " touche d'activation
@@ -100,7 +102,7 @@ hi PmenuThumb   cterm=none ctermfg=DarkGreen ctermbg=DarkGreen
 
 " Save vim buffers. Note that if Vim is invoked with a filename argument, then
 " the buffer list will not be restored from the last session. To use buffer
-" lists across sessions, invoke Vim without passing filename arguments. 
+" lists across sessions, invoke Vim without passing filename arguments.
 set viminfo+=%
 
 let g:lightline = {
@@ -161,3 +163,15 @@ endif
 " autocmd FileType python set ft=python.django " For SnipMate
 " autocmd FileType html set ft=htmldjango.html " For SnipMate
 set tw=160
+
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+
+" Go stuffs {
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+" }
