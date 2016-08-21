@@ -1,10 +1,16 @@
-snippet cutf
+# insert ipdb breakpoint
+snippet pdb
+	import ipdb; ipdb.set_trace()
+
+# encoding
+snippet cutf "encoding" !b
 	# coding: utf-8
+
 # import
-snippet fro
+snippet from
 	from ${1:package} import ${2:module}
 
-# If/else/elif
+# if/else/elif
 snippet if
 	if ${1:True}:
 	    ${2:pass}
@@ -14,44 +20,44 @@ snippet else
 snippet elif
 	elif ${1:True}:
 	    ${2:pass}
-#hasattr/getattr
-snippet hasa
+
+# class definition
+snippet class
+	class ${1:ClassName}(${2:object}):
+		"""${3:docstring for $1}"""
+		def __init__(self, ${4:arg}):
+			${5:super($1, self).__init__()}
+			self.$4 = $4
+			${0}
+
+# New Function/metod
+snippet def
+	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+		"""${3:docstring for $1}"""
+		${0}
+
+snippet assert
+	assert ${1:expected} ${2:==} ${3:result}
+
+# hasattr/getattr
+snippet hasattr
 	hasattr(${1:object}, ${2:attr})
-snippet geta 
+snippet getattr
 	getattr(${1:object}, "${2:attr}", ${3:None})
 
-# decorator
-snippet deco
-	class ${1:decorator}(object):
-		""" $1 decorator """
-		def __init__(self, f):
-			self.f = f
-		def __call__(self, *args, **kwargs):
-			self.f(*args, **kwargs)
-# context manager	
-snippet context
-	class ${1:context}(object):
-		""" $1 context manager """
-		def __init__(self, ${2:attr}):
-			self.$2 = $2
-
-		def __enter__(self):
-		    ${3:# TODO : write code here}
-
-		def __exit__(self, type, value, traceback):
-		    ${4:# TODO : write code here}
-# tests class
-snippet clt
-	class ${1:What}Tests(${2:unittest.TestCase}):
-		""" Tests for $1"""
-		def test_${3:what}(self):
-			"""Tests that ${4:what}"""
-			${5:pass}
 # tests
-snippet test
+snippet test_
 	def test_${1:what}(self):
 		"""Tests that ${2:what}"""
 		${3:pass}
+
+
+snippet for
+	for ${1:i} in ${2:sequence}:
+		${3:pass}
+snippet while
+	while ${1:condition}:
+		${0:pass}
 # context
 snippet with
 	with ${1:context} as ${2:name}:
@@ -61,38 +67,25 @@ snippet with
 snippet ilo
 	import logging
 	logger = logging.getLogger(__name__)
-# log
-snippet lo
-	logger.${1:info}("${2:Message}")
-snippet info
-	logger.info("${1:Message}")
-snippet debug
-	logger.debug("${1:Message}")
-snippet warning
-	logger.warning("${1:Message}")
-snippet critical
-	logger.critical("${1:Message}")
-snippet log
-	logger.log(logging.${1:DEBUG}, "${2:Message}")
-snippet exception
-	logger.exception("${1:Message}")
 
-# insert ipdb breakpoint
-snippet pdb
-	import ipdb; ipdb.set_trace()
+# logger
+snippet logger
+	logger.${1:info}("${2:}")
+snippet logger.
+	logger.${1:info}("${2:}")
 
-# Try/except with logging
-snippet try Try/Except - Log
+# try/except with logging
+snippet try Try/Except
 	try:
 		${1:pass}
-	except ${2:Exception}, ${3:exc}:
+	except (${2:Exception},)${3: as e}:
 		logger.exception("${4:Message}")
 		${5:raise}
-snippet try Try/Except/Finally - Log
+snippet try Try/Except/Finally
 	try:
 		${1:pass}
-	except ${2:Exception}, ${3:exc}:
+	except (${2:Exception},)${3: as e}:
 		logger.exception("${4:Message}")
-		${4:raise}
+		${5:raise}
 	finally:
-		${5:pass}
+		${6:pass}
