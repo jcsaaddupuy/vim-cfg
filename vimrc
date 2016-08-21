@@ -51,7 +51,26 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
 let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'supertab')
+" call add(g:pathogen_disabled, 'supertab')
+" call add(g:pathogen_disabled, 'syntastic')
+" call add(g:pathogen_disabled, 'ycm')
+call add(g:pathogen_disabled, 'snipmate')
+" call add(g:pathogen_disabled, 'ultisnips')
+
+
+" http://stackoverflow.com/a/22253548
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
+
 " Activation de pathogen
 call pathogen#infect()
 
