@@ -51,11 +51,8 @@ autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
 let g:pathogen_disabled = []
-" call add(g:pathogen_disabled, 'supertab')
-" call add(g:pathogen_disabled, 'syntastic')
-" call add(g:pathogen_disabled, 'ycm')
 call add(g:pathogen_disabled, 'snipmate')
-" call add(g:pathogen_disabled, 'ultisnips')
+call add(g:pathogen_disabled, 'vim-flake8')
 
 
 " http://stackoverflow.com/a/22253548
@@ -148,16 +145,16 @@ let g:lightline = {
 "raccourcis claviers {
 
 let g:ctrlp_map = '<c-p>'
-nnoremap <leader>. :CtrlPTag<cr>
+"nnoremap <leader>. :CtrlPTag<cr>
 "}
 "
 
 " pythons stuffs {
-autocmd BufWritePost *.py call Flake8()
+" autocmd BufWritePost *.py call Flake8()
 " removes trailing spaces on save against python files
-autocmd BufWritePre *.py :%s/\s\+$//e
+" autocmd BufWritePre *.py :%s/\s\+$//e
 " " plugin flake
-let g:flake8_quickfix_location="topleft"
+" let g:flake8_quickfix_location="topleft"
 " shortcut for autopep8
 map <F8> :! yapf -i %<CR><ESC>
 
@@ -194,3 +191,10 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 " }
+"
+"
+
+" Pytest
+au FileType python nmap <silent><Leader>f <Esc>:Pytest file<CR>
+au FileType python nmap <silent><Leader>c <Esc>:Pytest class<CR>
+au FileType python nmap <silent><Leader>m <Esc>:Pytest method<CR>
