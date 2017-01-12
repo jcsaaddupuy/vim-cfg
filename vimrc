@@ -116,6 +116,9 @@ hi PmenuSbar    cterm=none ctermfg=none      ctermbg=Green
 hi PmenuThumb   cterm=none ctermfg=DarkGreen ctermbg=DarkGreen
 
 
+set splitbelow
+set splitright
+
 " Save vim buffers. Note that if Vim is invoked with a filename argument, then
 " the buffer list will not be restored from the last session. To use buffer
 " lists across sessions, invoke Vim without passing filename arguments.
@@ -156,7 +159,7 @@ let g:ctrlp_map = '<c-p>'
 " " plugin flake
 " let g:flake8_quickfix_location="topleft"
 " shortcut for autopep8
-map <F8> :! yapf -i %<CR><ESC>
+map <F8> :! yapf --style='{based_on_style: pep8, column_limit: 99}' -i %<CR><ESC>
 
 nnoremap <F5> :GundoToggle<CR>
 
@@ -198,3 +201,21 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType python nmap <silent><Leader>f <Esc>:Pytest file<CR>
 au FileType python nmap <silent><Leader>c <Esc>:Pytest class<CR>
 au FileType python nmap <silent><Leader>m <Esc>:Pytest method<CR>
+au FileType python nmap <silent><Leader>n <Esc>:Pytest function<CR>
+
+
+let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_flake8_max_line_length="160"
+
+"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_always_populate_loc_list = 1
+
+let g:syntastic_enable_signs = 0
+let g:syntastic_enable_balloons = 0
+let g:syntastic_enable_highlighting = 0
+
+let ropevim_vim_completion=1
+
