@@ -79,8 +79,8 @@ imap ;; <Esc>
 let mapleader = ","
 
 " Utilise la version sombre de Solarized
-set background=dark
-colorscheme solarized
+" set background=dark
+colorscheme badwolf
 " Enable transparent background"
 let g:solarized_termtrans=1
 let g:solarized_hitrail=1
