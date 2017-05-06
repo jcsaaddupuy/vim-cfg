@@ -148,6 +148,7 @@ let g:lightline = {
 "raccourcis claviers {
 
 let g:ctrlp_map = '<c-p>'
+nnoremap <silent> <Leader>c :set cursorcolumn! <CR>
 "nnoremap <leader>. :CtrlPTag<cr>
 "}
 "
