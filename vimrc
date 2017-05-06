@@ -1,5 +1,48 @@
 " Annule la compatibilite avec l’ancetre Vi
 set nocompatible
+filetype off
+
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'editorconfig/editorconfig-vim'
+
+Plugin 'itchyny/lightline.vim'
+Plugin 'majutsushi/tagbar'
+
+Plugin 'nginx.vim'
+Plugin 'ervandew/supertab'
+
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'altercation/vim-colors-solarized'
+
+"  ctrlp
+Plugin 'kien/ctrlp.vim'
+" Gundo
+Plugin 'sjl/gundo.vim'
+" nerdtree
+Plugin 'xuyuanp/nerdtree-git-plugin'
+
+" Lustyexplorer
+Plugin 'sjbach/lusty'
+
+" snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+call vundle#end()
+filetype plugin indent on
+
+"
+
 
 " Affichage
 set title	"Mets à jour le titre de cla console
