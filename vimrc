@@ -1,6 +1,36 @@
 " Annule la compatibilite avec l’ancetre Vi
 set nocompatible
 
+" Ajout de Vundle au runtime path et initialisation
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" On indique à Vundle de s'auto-gérer :)
+Plugin 'gmarik/Vundle.vim' 
+
+"
+" C'est ici que vous allez placer la liste des plugins que Vundle doit gérer
+"
+Plugin 'itchyny/lightline.vim'
+" snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+" Ctrlp
+Plugin 'kien/ctrlp.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-scripts/LustyExplorer'
+
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'majutsushi/tagbar'
+Plugin 'python-rope/ropevim'
+
+call vundle#end()            " Nécessaire
+filetype plugin indent on    " Nécessaire
+
+
+
 " Affichage
 set title	"Mets à jour le titre de cla console
 set ruler	"Affiche le numéros de lignes
@@ -49,11 +79,6 @@ set relativenumber "numbers are relatives
 :au FocusGained * :set relativenumber
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
-
-let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'snipmate')
-call add(g:pathogen_disabled, 'vim-flake8')
-
 
 " http://stackoverflow.com/a/22253548
 " make YCM compatible with UltiSnips (using supertab)
