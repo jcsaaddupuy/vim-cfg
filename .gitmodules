@@ -64,3 +64,6 @@
 [submodule "vim/bundle/vim-mustache-handlebars"]
 	path = vim/bundle/vim-mustache-handlebars
 	url = https://github.com/mustache/vim-mustache-handlebars.git
+[submodule "vim/bundle/vim-disapprove-deep-indentation"]
+	path = vim/bundle/vim-disapprove-deep-indentation
+	url = https://github.com/dodie/vim-disapprove-deep-indentation.git

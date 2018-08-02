@@ -80,7 +80,7 @@ let mapleader = ","
 
 " Utilise la version sombre de Solarized
 " set background=dark
-colorscheme badwolf
+" colorscheme badwolf
 " Enable transparent background"
 let g:solarized_termtrans=1
 let g:solarized_hitrail=1
@@ -146,10 +146,9 @@ let g:lightline = {
 
 
 "raccourcis claviers {
-
+set wildignore+=*/tmp/*,*.o,*.so,*.swp,*.zip,*/node_modules/*,*/bower_components/*,*/htmlcov/*,*.pyc*,*/__pycache__/*
 let g:ctrlp_map = '<c-p>'
-"nnoremap <leader>. :CtrlPTag<cr>
-"}
+
 "
 
 " pythons stuffs {
@@ -159,7 +158,8 @@ let g:ctrlp_map = '<c-p>'
 " " plugin flake
 " let g:flake8_quickfix_location="topleft"
 " shortcut for autopep8
-map <F8> :! yapf --style='{based_on_style: pep8, column_limit: 99}' -i %<CR><ESC>
+" map <F8> :! yapf --style='{based_on_style: pep8, column_limit: 99}' -i %<CR><ESC>
+map <F8> :! autopep8 --in-place --aggressive --aggressive --max-line-length 160 -i %<CR><ESC>
 
 nnoremap <F5> :GundoToggle<CR>
 
@@ -204,10 +204,11 @@ au FileType python nmap <silent><Leader>m <Esc>:Pytest method<CR>
 au FileType python nmap <silent><Leader>n <Esc>:Pytest function<CR>
 
 
-let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_python_checkers = ['flake8', ]
+"let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_flake8_max_line_length="160"
 
-"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
