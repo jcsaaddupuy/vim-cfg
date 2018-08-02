@@ -1,10 +1,12 @@
 # insert ipdb breakpoint
 snippet pdb
-	import pdb; pdb.set_trace()
+	__import__('pdb').set_trace()
 snippet ipdb
-	import ipdb; ipdb.set_trace()
+	__import__('ipdb').set_trace()
 snippet rpdb
-	import rpdb; rpdb.set_trace()
+	__import__('rpdb').set_trace("0.0.0.0", 4444)
+snippet ripdb
+	__import__('ripdb').set_trace("0.0.0.0", 4444)
 
 # encoding
 snippet cutf "encoding" !b
