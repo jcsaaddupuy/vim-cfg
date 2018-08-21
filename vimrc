@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " On indique à Vundle de s'auto-gérer :)
-Plugin 'gmarik/Vundle.vim' 
+Plugin 'gmarik/Vundle.vim'
 
 "
 " C'est ici que vous allez placer la liste des plugins que Vundle doit gérer
@@ -18,16 +18,44 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 " Ctrlp
 Plugin 'kien/ctrlp.vim'
+" nerdtree
+Plugin 'scrooloose/nerdtree'
+Plugin 'xuyuanp/nerdtree-git-plugin'
+
 Plugin 'sjl/gundo.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-scripts/LustyExplorer'
 
+" autocomplete etc
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'majutsushi/tagbar'
 Plugin 'python-rope/ropevim'
+" for autocompletion with tab
+Plugin 'ervandew/supertab'
+
+Plugin 'majutsushi/tagbar'
+" code formatter
+Plugin 'ambv/black'
+
+" auto complete brackets etc
+Plugin 'Raimondi/delimitMate'
+" display colors for hexa strings
+Plugin 'lilydjwg/colorizer'
+
+" easily comment/uncomment (leader ci)
+Plugin 'scrooloose/nerdcommenter'
+" Git
+" git comands from vim
+Plugin 'tpope/vim-fugitive'
+" shows a git diff in the gutter (sign column) and stages/undoes hunks.
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'mustache/vim-mustache-handlebars'
+
+Plugin 'dodie/vim-disapprove-deep-indentation'
 
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
+
 
 
 
@@ -184,7 +212,22 @@ let g:ctrlp_map = '<c-p>'
 " let g:flake8_quickfix_location="topleft"
 " shortcut for autopep8
 " map <F8> :! yapf --style='{based_on_style: pep8, column_limit: 99}' -i %<CR><ESC>
-map <F8> :! autopep8 --in-place --aggressive --aggressive --max-line-length 160 -i %<CR><ESC>
+" map <F8> :! autopep8 --in-place --aggressive --aggressive --max-line-length 160 -i %<CR><ESC>
+"
+"
+"" nerdtree config
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 1
+"
+autocmd StdinReadPre * let s:std_in=1
+" auto open
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"close a tab if the only remaining window is NerdTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"
+let NERDTreeAutoDeleteBuffer = 1
+" end of nerdtree config
 
 nnoremap <F5> :GundoToggle<CR>
 
@@ -209,6 +252,25 @@ endif
 set tw=160
 
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind \ (backward slash) to grep shortcut
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
 
 " Go stuffs {
 au FileType go nmap <leader>r <Plug>(go-run)
