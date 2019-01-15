@@ -8,9 +8,6 @@ call vundle#begin()
 " On indique à Vundle de s'auto-gérer :)
 Plugin 'gmarik/Vundle.vim'
 
-"
-" C'est ici que vous allez placer la liste des plugins que Vundle doit gérer
-"
 Plugin 'itchyny/lightline.vim'
 " snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -39,7 +36,8 @@ Plugin 'ambv/black'
 " auto complete brackets etc
 Plugin 'Raimondi/delimitMate'
 " display colors for hexa strings
-Plugin 'lilydjwg/colorizer'
+" Plugin 'lilydjwg/colorizer'
+Plugin 'chrisbra/Colorizer'
 
 " easily comment/uncomment (leader ci)
 Plugin 'scrooloose/nerdcommenter'
@@ -51,7 +49,12 @@ Plugin 'airblade/vim-gitgutter'
 
 Plugin 'mustache/vim-mustache-handlebars'
 
+Plugin 'digitaltoad/vim-pug'
+Plugin 'posva/vim-vue'
+
 Plugin 'dodie/vim-disapprove-deep-indentation'
+
+Plugin 'thiagoalessio/rainbow_levels.vim'
 
 call vundle#end()            " Nécessaire
 filetype plugin indent on    " Nécessaire
@@ -141,7 +144,7 @@ let g:solarized_underline=1
 let g:solarized_visibility='high'
 let g:solarized_contrast='high'
 
-set t_Co=16
+set t_Co=256
 
 " Activation de NERDTree sur un CTRL n
 map <silent> <F2> :NERDTreeToggle<CR>
@@ -215,10 +218,12 @@ let g:ctrlp_map = '<c-p>'
 " map <F8> :! autopep8 --in-place --aggressive --aggressive --max-line-length 160 -i %<CR><ESC>
 "
 "
+" Colorizer
+autocmd VimEnter * ColorHighlight .
 "" nerdtree config
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let NERDTreeQuitOnOpen = 1
+" let NERDTreeQuitOnOpen = 1
 "
 autocmd StdinReadPre * let s:std_in=1
 " auto open
@@ -290,7 +295,10 @@ au FileType python nmap <silent><Leader>c <Esc>:Pytest class<CR>
 au FileType python nmap <silent><Leader>m <Esc>:Pytest method<CR>
 au FileType python nmap <silent><Leader>n <Esc>:Pytest function<CR>
 
+" black
+" let g:black_linelength=140
 
+" syntastic
 let g:syntastic_python_checkers = ['flake8', ]
 "let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_flake8_max_line_length="160"
@@ -305,5 +313,19 @@ let g:syntastic_enable_signs = 0
 let g:syntastic_enable_balloons = 0
 let g:syntastic_enable_highlighting = 0
 
+" rope
 let ropevim_vim_completion=1
 
+hi! RainbowLevel0 ctermbg=240 guibg=#585858
+hi! RainbowLevel1 ctermbg=239 guibg=#4e4e4e
+hi! RainbowLevel2 ctermbg=238 guibg=#444444
+hi! RainbowLevel3 ctermbg=237 guibg=#3a3a3a
+hi! RainbowLevel4 ctermbg=236 guibg=#303030
+hi! RainbowLevel5 ctermbg=235 guibg=#262626
+hi! RainbowLevel6 ctermbg=234 guibg=#1c1c1c
+hi! RainbowLevel7 ctermbg=233 guibg=#121212
+hi! RainbowLevel8 ctermbg=232 guibg=#080808
+
+let g:vue_disable_pre_processors=1
+autocmd FileType vue syntax sync fromstart
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css.less.pug
